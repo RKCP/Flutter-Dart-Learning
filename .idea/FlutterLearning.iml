@@ -3,9 +3,13 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/buchalka_boys/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/buchalka_boys/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/buchalka_boys/build" />
       <excludeFolder url="file://$MODULE_DIR$/i_am_rich/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/i_am_rich/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/i_am_rich/build" />
+      <excludeFolder url="file://$MODULE_DIR$/testing_app/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/testing_app/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/testing_app/build" />
     </content>
