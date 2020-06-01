@@ -9,44 +9,33 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.grey[800],
         body: SafeArea(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Container(
-                width: 100,
-                color: Colors.red,
+            child: Column(
+          children: <Widget>[
+            CircleAvatar(
+              radius: 100,
+              backgroundImage: AssetImage('images/avatar.png'),
+            ),
+            Text(
+              'Raphael Peters',
+              style: TextStyle(
+                fontFamily: 'PermanentMarker',
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                letterSpacing: 4,
               ),
-              SizedBox(
-                width: 57,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.yellow,
-                  ),
-                  Container(
-                    height: 100,
-                    width: 100,
-                    color: Colors.green,
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 57,
-              ),
-              Container(
-                height: 100,
-                width: 100,
-                color: Colors.blue,
-              ),
-            ],
-          ),
-        ),
+            ),
+            Text('SOFTWARE DEVELOPER',
+                style: TextStyle(
+                  fontFamily: 'SourceSansPro',
+                  fontSize: 23,
+                  color: Colors.white,
+                  letterSpacing: 3,
+                ))
+          ],
+        )),
       ),
     );
   }
