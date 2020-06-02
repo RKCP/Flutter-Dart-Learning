@@ -60,9 +60,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: PermanentMarker
+    - family: RockSalt
       fonts:
-        - asset: fonts/PermanentMarker-Regular.ttf
+        - asset: fonts/RockSalt-Regular.ttf
     - family: SourceSansPro
       fonts:
         - asset: fonts/SourceSansPro-Light.ttf
