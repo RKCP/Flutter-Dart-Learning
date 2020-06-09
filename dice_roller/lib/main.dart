@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   return runApp(
@@ -15,8 +16,14 @@ void main() {
   );
 }
 
-class DicePage extends StatelessWidget {
+class DicePage extends StatefulWidget {
+  @override
+  _DicePageState createState() => _DicePageState();
+}
+
+class _DicePageState extends State<DicePage> {
   int leftDiceNum = 1;
+  int rightDiceNum = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +34,27 @@ class DicePage extends StatelessWidget {
             child: FlatButton(
               child: Image.asset('images/dice$leftDiceNum.png'),
               onPressed: () {
-                leftDiceNum * 2;
-                print('Left Dice Pressed');
+                setState(() {
+                  leftDiceNum = Random().nextInt(6) + 1;
+                  rightDiceNum = Random().nextInt(6) + 1;
+                  // need this inside setState.
+                  // When the dice is pressed, we want to update the build and setState does this.
+                  // image won't update without this. setState triggers a rebuild,
+                  // and changes what needs to change, aka our image asset.
+                  // setState sets changed things as dirty, and on hot reload,
+                  // changes things that use the changed variable etc
+                });
               },
             ),
           ),
           Expanded(
             child: FlatButton(
-              child: Image.asset('images/dice1.png'),
+              child: Image.asset('images/dice$rightDiceNum.png'),
               onPressed: () {
-                Image.asset('images/dice2.png');
-                print('Right Dice Pressed');
+                setState(() {
+                  rightDiceNum = Random().nextInt(6) + 1;
+                  leftDiceNum = Random().nextInt(6) + 1;
+                });
               },
             ),
           ),
