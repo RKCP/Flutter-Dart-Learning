@@ -25,6 +25,19 @@ class _DicePageState extends State<DicePage> {
   int leftDiceNum = 1;
   int rightDiceNum = 1;
 
+  void rollDice() {
+    setState(() {
+      leftDiceNum = Random().nextInt(6) + 1;
+      rightDiceNum = Random().nextInt(6) + 1;
+      // need this inside setState.
+      // When the dice is pressed, we want to update the build and setState does this.
+      // image won't update without this. setState triggers a rebuild,
+      // and changes what needs to change, aka our image asset.
+      // setState sets changed things as dirty, and on hot reload,
+      // changes things that use the changed variable etc
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -34,16 +47,7 @@ class _DicePageState extends State<DicePage> {
             child: FlatButton(
               child: Image.asset('images/dice$leftDiceNum.png'),
               onPressed: () {
-                setState(() {
-                  leftDiceNum = Random().nextInt(6) + 1;
-                  rightDiceNum = Random().nextInt(6) + 1;
-                  // need this inside setState.
-                  // When the dice is pressed, we want to update the build and setState does this.
-                  // image won't update without this. setState triggers a rebuild,
-                  // and changes what needs to change, aka our image asset.
-                  // setState sets changed things as dirty, and on hot reload,
-                  // changes things that use the changed variable etc
-                });
+                rollDice();
               },
             ),
           ),
@@ -51,10 +55,7 @@ class _DicePageState extends State<DicePage> {
             child: FlatButton(
               child: Image.asset('images/dice$rightDiceNum.png'),
               onPressed: () {
-                setState(() {
-                  rightDiceNum = Random().nextInt(6) + 1;
-                  leftDiceNum = Random().nextInt(6) + 1;
-                });
+                rollDice();
               },
             ),
           ),
