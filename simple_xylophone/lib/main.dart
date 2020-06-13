@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
 
@@ -63,7 +64,15 @@ class XylophoneApp extends StatelessWidget {
   }
 }
 
+///Audio player state handler to get rid of the 'Callback lookup failed!' error onSoundComplete
+void audioPlayerHandler(AudioPlayerState value) {
+  print('The AudioPlayerState value is $value');
+}
+
+/// Method to change the note file to whatever button is pressed.
 void changeNote(int buttonPressed) {
-  final player = AudioCache();
-  player.play('note$buttonPressed.wav');
+  AudioPlayer audioPlayer = new AudioPlayer();
+  audioPlayer.monitorNotificationStateChanges(audioPlayerHandler);
+  AudioCache audioCache = AudioCache();
+  audioCache.play('note$buttonPressed.wav');
 }
