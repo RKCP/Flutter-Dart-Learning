@@ -5,6 +5,16 @@ import 'package:audioplayers/audio_cache.dart';
 void main() => runApp(XylophoneApp());
 
 class XylophoneApp extends StatelessWidget {
+  List<Color> colors = [
+    Colors.red[600],
+    Colors.yellow,
+    Colors.pink[200],
+    Colors.green,
+    Colors.purple,
+    Colors.orange,
+    Colors.blue
+  ];
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,62 +25,13 @@ class XylophoneApp extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Expanded(
-                  child: FlatButton(
-                    color: Colors.red[600],
-                    onPressed: () {
-                      changeNote(1);
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: FlatButton(
-                    color: Colors.yellow,
-                    onPressed: () {
-                      changeNote(2);
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: FlatButton(
-                    color: Colors.pink[200],
-                    onPressed: () {
-                      changeNote(3);
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: FlatButton(
-                    color: Colors.green,
-                    onPressed: () {
-                      changeNote(4);
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: FlatButton(
-                    color: Colors.purple,
-                    onPressed: () {
-                      changeNote(5);
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: FlatButton(
-                    color: Colors.orange,
-                    onPressed: () {
-                      changeNote(6);
-                    },
-                  ),
-                ),
-                Expanded(
-                  child: FlatButton(
-                    color: Colors.blue,
-                    onPressed: () {
-                      changeNote(7);
-                    },
-                  ),
-                ),
+                createButton(colors[0], 1),
+                createButton(colors[1], 2),
+                createButton(colors[2], 3),
+                createButton(colors[3], 4),
+                createButton(colors[4], 5),
+                createButton(colors[5], 6),
+                createButton(colors[6], 7),
               ],
             ),
           ),
@@ -91,4 +52,15 @@ void changeNote(int buttonPressed) {
   audioPlayer.monitorNotificationStateChanges(audioPlayerHandler);
   AudioCache audioCache = AudioCache();
   audioCache.play('note$buttonPressed.wav');
+}
+
+Expanded createButton(Color color, int note) {
+  return Expanded(
+    child: FlatButton(
+      color: color,
+      onPressed: () {
+        changeNote(note);
+      },
+    ),
+  );
 }
