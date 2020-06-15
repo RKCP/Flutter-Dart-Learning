@@ -5,7 +5,7 @@ import 'package:audioplayers/audio_cache.dart';
 void main() => runApp(XylophoneApp());
 
 ///field variable as I do not want to build this list every time it is used.
-List<Color> colors = [
+final List<Color> colors = [
   Colors.red[600],
   Colors.yellow,
   Colors.pink[200],
