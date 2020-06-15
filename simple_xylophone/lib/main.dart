@@ -4,17 +4,18 @@ import 'package:audioplayers/audio_cache.dart';
 
 void main() => runApp(XylophoneApp());
 
-class XylophoneApp extends StatelessWidget {
-  List<Color> colors = [
-    Colors.red[600],
-    Colors.yellow,
-    Colors.pink[200],
-    Colors.green,
-    Colors.purple,
-    Colors.orange,
-    Colors.blue
-  ];
+///field variable as I do not want to build this list every time it is used.
+List<Color> colors = [
+  Colors.red[600],
+  Colors.yellow,
+  Colors.pink[200],
+  Colors.green,
+  Colors.purple,
+  Colors.orange,
+  Colors.blue
+];
 
+class XylophoneApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,17 +24,8 @@ class XylophoneApp extends StatelessWidget {
         body: SafeArea(
           child: Center(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                createButton(colors[0], 1),
-                createButton(colors[1], 2),
-                createButton(colors[2], 3),
-                createButton(colors[3], 4),
-                createButton(colors[4], 5),
-                createButton(colors[5], 6),
-                createButton(colors[6], 7),
-              ],
-            ),
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: createWidgets(7)),
           ),
         ),
       ),
@@ -54,13 +46,27 @@ void changeNote(int buttonPressed) {
   audioCache.play('note$buttonPressed.wav');
 }
 
-Expanded createButton(Color color, int note) {
+/// Creates the buttons on the xylophone.
+Expanded createButton(int number) {
   return Expanded(
     child: FlatButton(
-      color: color,
+      color: colors[number],
       onPressed: () {
-        changeNote(note);
+        changeNote(number);
       },
     ),
   );
+}
+
+/// Can't put for loops inside widgets, so have to create the buttons here
+/// and add them to a list of widgets that build the xylophone.
+List<Widget> createWidgets(int numberOfWidgets) {
+  List<Widget> widgets =
+      List(); // cannot give it a fixed number of widgets to add. Must be growable otherwise throws an error.
+
+  for (int i = 0; i < numberOfWidgets; i++) {
+    widgets.add(createButton(i));
+  }
+
+  return widgets;
 }
