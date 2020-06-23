@@ -26,6 +26,8 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Icon> scores = [];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -63,7 +65,12 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                print('true');
+                setState(() {
+                  scores.add(Icon(
+                    Icons.check,
+                    color: Colors.green,
+                  ));
+                });
               },
             ),
           ),
@@ -82,11 +89,21 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                print('false');
+                setState(() {
+                  scores.add(Icon(
+                    Icons.close,
+                    color: Colors.red,
+                  ));
+                });
               }, // must be present or the buttons color will be set to the default disabledColor property.
             ),
           ),
-        )
+        ),
+        Expanded(
+          child: Row(
+            children: scores,
+          ),
+        ),
       ],
     );
   }
