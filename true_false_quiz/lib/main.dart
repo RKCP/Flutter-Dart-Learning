@@ -103,8 +103,6 @@ class _QuizPageState extends State<QuizPage> {
                 } else {
                   counter++;
                 }
-
-                print(counter);
               },
             ),
           ),
