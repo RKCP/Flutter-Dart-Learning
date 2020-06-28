@@ -84,4 +84,16 @@ class DatabaseHelper {
     return await db.query(
         _tableName); // queries all the rows that are present in the table.
   }
+
+  /// This function updates a specific row in the table.
+  Future<void> updateRow(Map<String, dynamic> rowToUpdate) async {
+    Database db = await databaseInstance.database;
+    int id = rowToUpdate[columnId];
+    await db.update(_tableName, rowToUpdate, where: '$columnId = $id');
+  }
+
+  Future<void> deleteRow(int id) async {
+    Database db = await databaseInstance.database;
+    await db.delete(_tableName, where: '$columnId = $id');
+  }
 }
