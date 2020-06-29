@@ -92,8 +92,14 @@ class DatabaseHelper {
     await db.update(_tableName, rowToUpdate, where: '$columnId = $id');
   }
 
+  /// This function deletes a specific row in the table.
   Future<void> deleteRow(int id) async {
     Database db = await databaseInstance.database;
     await db.delete(_tableName, where: '$columnId = $id');
+  }
+
+  Future<void> deleteAllRows() async {
+    Database db = await databaseInstance.database;
+    await db.rawDelete('DELETE FROM $_tableName;');
   }
 }

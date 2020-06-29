@@ -64,6 +64,25 @@ class _MyHomePageState extends State<MyHomePage> {
               print(queriedRows);
             },
           ),
+        ),
+        Expanded(
+          child: FlatButton(
+            color: Colors.orange,
+            child: Text('Delete Animal'),
+            onPressed: () async {
+              await DatabaseHelper.databaseInstance
+                  .deleteRow(2); // place id in here of row you want to delete
+            },
+          ),
+        ),
+        Expanded(
+          child: FlatButton(
+            color: Colors.red,
+            child: Text('Delete All Animals'),
+            onPressed: () async {
+              await DatabaseHelper.databaseInstance.deleteAllRows();
+            },
+          ),
         )
       ],
     );
