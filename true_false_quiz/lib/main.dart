@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Question.dart';
+import 'package:truefalsequiz/QuizHelper.dart';
 
 void main() => runApp(TFQuiz());
 
@@ -30,16 +30,10 @@ class _QuizPageState extends State<QuizPage> {
   // Score keeping
   List<Icon> scores = [];
 
-  List<Question> listOfQuestions = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(
-        q: 'Approximately one quarter of human bones are in the feet.',
-        a: true),
-    Question(q: 'A slug\'s blood is green.', a: true)
-  ];
-
   // could use a HashMap for these, but for the purpose of this exercise, using Lists (Arrays) for learning.
   int counter = 0;
+
+  QuizHelper quizHelper = new QuizHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +47,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                listOfQuestions[counter].questionText,
+                quizHelper.listOfQuestions[counter].questionText,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -78,7 +72,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                if (listOfQuestions[counter].questionAnswer == true) {
+                if (quizHelper.listOfQuestions[counter].questionAnswer ==
+                    true) {
                   setState(() {
                     scores.add(Icon(
                       Icons.check,
@@ -93,7 +88,7 @@ class _QuizPageState extends State<QuizPage> {
                     ));
                   });
                 }
-                if (counter + 1 >= listOfQuestions.length) {
+                if (counter + 1 >= quizHelper.listOfQuestions.length) {
                   counter = 0;
                 } else {
                   counter++;
@@ -116,7 +111,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                if (listOfQuestions[counter].questionAnswer == false) {
+                if (quizHelper.listOfQuestions[counter].questionAnswer ==
+                    false) {
                   setState(() {
                     scores.add(Icon(
                       Icons.check,
@@ -131,7 +127,7 @@ class _QuizPageState extends State<QuizPage> {
                     ));
                   });
                 }
-                if (counter + 1 >= listOfQuestions.length) {
+                if (counter + 1 >= quizHelper.listOfQuestions.length) {
                   counter = 0;
                 } else {
                   counter++;
