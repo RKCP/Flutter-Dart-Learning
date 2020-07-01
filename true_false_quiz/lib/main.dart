@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:truefalsequiz/QuizHelper.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 void main() => runApp(TFQuiz());
 
@@ -35,21 +36,45 @@ class _QuizPageState extends State<QuizPage> {
   void checkAnswer(bool userAnswer) {
     bool correctAnswer = quizHelper.getAnswer();
 
-    if (userAnswer == correctAnswer) {
-      setState(() {
-        scores.add(Icon(
-          Icons.check,
-          color: Colors.green,
-        ));
-      });
-    } else {
-      setState(() {
-        scores.add(Icon(
-          Icons.close,
-          color: Colors.red,
-        ));
-      });
-    }
+    setState(() {
+      if (quizHelper.isFinished()) {
+        // Alert user
+        Alert(
+          context: context,
+          title: 'Quiz Completed!',
+          desc: 'You have completed the quiz!',
+          buttons: [
+            DialogButton(
+              child: Text(
+                "RESTART",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => Navigator.pop(context),
+              width: 120,
+            )
+          ],
+        ).show();
+
+        // reset the quiz
+        quizHelper.resetQuiz();
+
+        // reset the scores
+        scores = [];
+      } else {
+        if (userAnswer == correctAnswer) {
+          scores.add(Icon(
+            Icons.check,
+            color: Colors.green,
+          ));
+        } else {
+          scores.add(Icon(
+            Icons.close,
+            color: Colors.red,
+          ));
+        }
+        quizHelper.nextQuestion();
+      }
+    });
   }
 
   @override
@@ -90,7 +115,6 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 checkAnswer(true);
-                quizHelper.nextQuestion();
               },
             ),
           ),
@@ -110,14 +134,15 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 checkAnswer(false);
-                quizHelper.nextQuestion();
               }, // must be present or the buttons color will be set to the default disabledColor property.
             ),
           ),
         ),
         Expanded(
-          child: Row(
-            children: scores,
+          child: Center(
+            child: Row(
+              children: scores,
+            ),
           ),
         ),
       ],

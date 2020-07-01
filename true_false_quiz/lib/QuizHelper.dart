@@ -44,4 +44,19 @@ class QuizHelper {
   bool getAnswer() {
     return listOfQuestions[_counter].questionAnswer;
   }
+
+  /// This is a method that checks to see if we are at the end of the quiz.
+  bool isFinished() {
+    if (this._counter >= listOfQuestions.length - 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /// This is a method that resets the quiz to the start upon completion
+  void resetQuiz() {
+    listOfQuestions.shuffle();
+    this._counter = 0;
+  }
 }
