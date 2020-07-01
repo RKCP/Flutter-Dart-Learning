@@ -1,6 +1,8 @@
 import 'Question.dart';
 
 class QuizHelper {
+  int _counter = 0;
+
   List<Question> listOfQuestions = [
     Question('Some cats are actually allergic to humans', true),
     Question('You can lead a cow down stairs but not up stairs.', false),
@@ -28,4 +30,18 @@ class QuizHelper {
         'In West Virginia, USA, if you accidentally hit an animal with your car, you are free to take it home to eat.',
         true),
   ];
+
+  void nextQuestion() {
+    if (_counter < listOfQuestions.length - 1) {
+      _counter++;
+    }
+  }
+
+  String getQuestion() {
+    return listOfQuestions[_counter].questionText;
+  }
+
+  bool getAnswer() {
+    return listOfQuestions[_counter].questionAnswer;
+  }
 }

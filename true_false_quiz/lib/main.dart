@@ -30,10 +30,27 @@ class _QuizPageState extends State<QuizPage> {
   // Score keeping
   List<Icon> scores = [];
 
-  // could use a HashMap for these, but for the purpose of this exercise, using Lists (Arrays) for learning.
-  int counter = 0;
-
   QuizHelper quizHelper = new QuizHelper();
+
+  void checkAnswer(bool userAnswer) {
+    bool correctAnswer = quizHelper.getAnswer();
+
+    if (userAnswer == correctAnswer) {
+      setState(() {
+        scores.add(Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
+      });
+    } else {
+      setState(() {
+        scores.add(Icon(
+          Icons.close,
+          color: Colors.red,
+        ));
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +64,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                quizHelper.listOfQuestions[counter].questionText,
+                quizHelper.getQuestion(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -72,27 +89,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                if (quizHelper.listOfQuestions[counter].questionAnswer ==
-                    true) {
-                  setState(() {
-                    scores.add(Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ));
-                  });
-                } else {
-                  setState(() {
-                    scores.add(Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ));
-                  });
-                }
-                if (counter + 1 >= quizHelper.listOfQuestions.length) {
-                  counter = 0;
-                } else {
-                  counter++;
-                }
+                checkAnswer(true);
+                quizHelper.nextQuestion();
               },
             ),
           ),
@@ -111,28 +109,8 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                if (quizHelper.listOfQuestions[counter].questionAnswer ==
-                    false) {
-                  setState(() {
-                    scores.add(Icon(
-                      Icons.check,
-                      color: Colors.green,
-                    ));
-                  });
-                } else {
-                  setState(() {
-                    scores.add(Icon(
-                      Icons.close,
-                      color: Colors.red,
-                    ));
-                  });
-                }
-                if (counter + 1 >= quizHelper.listOfQuestions.length) {
-                  counter = 0;
-                } else {
-                  counter++;
-                }
-                print(counter);
+                checkAnswer(false);
+                quizHelper.nextQuestion();
               }, // must be present or the buttons color will be set to the default disabledColor property.
             ),
           ),
